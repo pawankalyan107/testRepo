@@ -11,10 +11,4 @@ const accountSchema = new mongoose.Schema({
   }
 })
 
-accountSchema.virtual('policy', {
-  ref: 'Policy',
-  localField: '_id',
-  foreignField: 'account'
-})
-
 export const Account = mongoose.model('Account', accountSchema)

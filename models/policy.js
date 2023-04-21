@@ -8,6 +8,10 @@ const policySchema = new mongoose.Schema({
   policy_end_date: Date,
   policy_type: String,
   premium_amount: Number,
+  premium_amount_written:  Number,
+  hasActive_ClientPolicy: String,
+  Applicant_ID: String,
+  primary: String,
   account: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Account'

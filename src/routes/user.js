@@ -19,12 +19,10 @@ router.post('/user', async (req, res) => {
 
 router.get('/user/:id', async (req, res) => {
   const userId = req.params.id
-
   const ObjectId = mongoose.Types.ObjectId
   const _id = new ObjectId(userId)
   try {
     const user = await User.findById(_id)
-    console.log(user)
     res.status(200).send(user)
   } catch (error) {
     console.error(error);
