@@ -18,6 +18,17 @@ router.post('/:id/policy', async (req, res) => {
   }
 })
 
+router.get('/user/:id/policies', async (req, res) => {
+  const id = req.params.id
+  try {
+    const policies = await Policy.find({ owner: id })
+    res.send(policies)
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ err: error.message });
+  }
+})
+
 router.patch('/:id/policy/:policyId', async (req, res) => {
   const { id, policyId } = req.params
   const updates = Object.keys(req.body)

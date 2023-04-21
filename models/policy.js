@@ -15,6 +15,10 @@ const policySchema = new mongoose.Schema({
   account: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Account'
+  },
+  owner:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   }
 })
 
