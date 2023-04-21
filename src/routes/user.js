@@ -4,7 +4,7 @@ import { User } from '../../models/user.js'
 
 const router = new express.Router()
 
-router.post('/user', async (req, res) => {
+router.post('/users', async (req, res) => {
   const user = new User(req.body)
   try {
     await user.save()
@@ -17,7 +17,17 @@ router.post('/user', async (req, res) => {
   }
 })
 
-router.get('/user/:id', async (req, res) => {
+router.get('/users', async (req, res) => {
+  try {
+    const users =  await User.find()
+    res.send(users)
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ err: error.message })
+  }
+})
+
+router.get('/users/:id', async (req, res) => {
   const userId = req.params.id
   const ObjectId = mongoose.Types.ObjectId
   const _id = new ObjectId(userId)
@@ -30,7 +40,7 @@ router.get('/user/:id', async (req, res) => {
   }
 })
 
-router.patch('/user/:id', async (req, res) => {
+router.patch('/users/:id', async (req, res) => {
   const userId = req.params.id
   const ObjectId = mongoose.Types.ObjectId
   const _id = new ObjectId(userId)
@@ -44,7 +54,7 @@ router.patch('/user/:id', async (req, res) => {
   }
 })
 
-router.delete('/user/:id', async (req, res) => {
+router.delete('/users/:id', async (req, res) => {
   const userId = req.params.id
   try {
     const user = await User.findOneAndDelete({ _id: userId })
