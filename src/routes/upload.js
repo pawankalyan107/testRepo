@@ -4,6 +4,9 @@ import multer from 'multer'
 import { User } from '../../models/user.js'
 import { Account } from '../../models/account.js'
 import { Policy } from '../../models/policy.js'
+import { Lob } from '../../models/LOB.js'
+import { Carrier } from '../../models/carrier.js'
+import { Agent } from '../../models/Agent.js'
 
 const router = new express.Router()
 const upload = multer()
@@ -23,6 +26,9 @@ router.post('/upload', upload.single('file'), async (req, res) => {
       jsonData[index]['account'] = accountId
     })
     await Policy.insertMany(jsonData)
+    await Lob.insertMany(jsonData)
+    await Carrier.insertMany(jsonData)
+    await Agent.insertMany(jsonData)
     res.json({ success: true })
   } catch (error) {
     console.error(error);

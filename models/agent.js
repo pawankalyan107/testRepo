@@ -7,3 +7,5 @@ const agentSchema = new mongoose.Schema({
   producer: String,
   csr: String
 })
+
+export const Agent = mongoose.model('Agent', agentSchema)
