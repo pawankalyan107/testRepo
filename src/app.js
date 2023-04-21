@@ -1,23 +1,14 @@
 import express from 'express'
-import multer from 'multer'
-import csv from 'csvtojson'
-import { Data } from '../models/data.js'
+import bodyParser from 'body-parser'
+import { router as uploadRouter } from './routes/upload.js'
+import { router as userRouter } from './routes/user.js'
+import { router as accountRouter } from './routes/account.js'
+import { router as policyRouter } from './routes/policy.js'
 
 const app = express()
-const upload = multer()
 
-app.post('/upload', upload.single('file'), async (req, res) => {
-  try {
-    const csvFile = req.file
-    const jsonData = await csv().fromString(csvFile.buffer.toString())
-    await Data.insertMany(jsonData)
-
-    res.json({ success: true });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ err: error.message });
-  }
-})
+app.use(bodyParser.json())
+app.use(uploadRouter, userRouter, accountRouter, policyRouter)
 
 app.listen(3001, () => {
   console.log('server is up on port ' + 3001)
