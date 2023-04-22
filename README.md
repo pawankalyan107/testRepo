@@ -17,7 +17,7 @@ To install and run this project, follow these steps:
 1. Clone the repository:
 
 https://github.com/pawankalyan107/testRepo.git
-cd your-project
+cd testRepo
 
 
 2. Install dependencies:
